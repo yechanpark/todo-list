@@ -37,11 +37,15 @@ export default handleActions({
         }));
     },
     [TOGGLE]: (state, action) => {
-        const { payload: index } = action;
-        // = const index = action.payload;
-        /* 비구조화 할당으로 index 레퍼런스에 action.payload 값을 넣음
+        const { payload: id } = action;
+        // = const id = action.payload;
+        /* 비구조화 할당으로 id 레퍼런스에 action.payload 값을 넣음
            이 작업이 필수는 아니지만, 나중에 이 코드를 보았을 때 여기에서 payload가 어떤 값을 의미하는지 쉽게 이해할 수 있음
         */
+
+        // 전달받은 id를 가지고 index를 조회
+        const index = state.findIndex(todo => todo.get('id') === id);
+
         // updateIn으로 현재 값을 참조하여 반대 값으로 설정
         return state.updateIn([index, 'done'], done => !done);
         /* updateIn을 사용하지 않는다면 다음과 같이 작성할 수도 있다. 둘 중 편해보이는 코드로 작성하면 된다.
@@ -49,7 +53,8 @@ export default handleActions({
         */
     },
     [REMOVE]: (state, action) => {
-        const { payload: index } = action;
+        const { payload: id } = action;
+        const index = state.findIndex(todo => todo.get('id') === id);
         return state.delete(index);
     }
 }, initialState)
