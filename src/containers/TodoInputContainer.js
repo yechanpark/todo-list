@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TodoInput from '../components/TodoInput';
+import TodoInsert from '../components/TodoInput';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -35,7 +35,7 @@ class TodoInputContainer extends Component {
         const { value } = this.props;
         const { handleChange, handleInsert } = this;
         return (
-            <TodoInput
+            <TodoInsert
                 onChange={handleChange}
                 onInsert={handleInsert}
                 value={value}
